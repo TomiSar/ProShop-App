@@ -112,7 +112,7 @@ const ProfileScreen = () => {
             {error?.data?.message || error.error}
           </Message>
         ) : (
-          <Table striped hover responsive className='table-sm'>
+          <Table className='table-sm' striped hover responsive>
             <thead>
               <tr>
                 <th>ID</th>
