@@ -51,12 +51,12 @@ const ProductEditScreen = () => {
         countInStock,
       }).unwrap(); // NOTE: here we need to unwrap the Promise to catch any rejection in our catch block
 
+      refetch();
+      navigate('/admin/productlist');
       toast.success('Product updated', {
         position: 'bottom-right',
         autoClose: 2000,
       });
-      refetch();
-      navigate('/admin/productlist');
     } catch (error) {
       toast.error(error?.data?.message || error.error);
     }
