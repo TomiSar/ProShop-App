@@ -125,7 +125,6 @@ const ProductEditScreen = () => {
               ></Form.Control>
             </Form.Group>
 
-            {/* IMAGE STILL MISSING!! */}
             <Form.Group controlId='image'>
               <Form.Label>Image</Form.Label>
               <Form.Control
@@ -139,8 +138,8 @@ const ProductEditScreen = () => {
                 label='Choose File'
                 onChange={uploadFileHandler}
               ></Form.Control>
-              {loadingUpload && <Loader />}
             </Form.Group>
+            {loadingUpload && <Loader />}
 
             <Form.Group className='my-2' controlId='brand'>
               <Form.Label>Brand</Form.Label>

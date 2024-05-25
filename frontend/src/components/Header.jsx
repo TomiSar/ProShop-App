@@ -5,7 +5,9 @@ import { FaShoppingCart, FaUser } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLogoutMutation } from '../slices/usersApiSlice';
 import { logout } from '../slices/authSlice';
+import { toast } from 'react-toastify';
 import logo from '../assets/logo.png';
+import SearchBox from './SearchBox';
 
 const Header = () => {
   const navigate = useNavigate();
@@ -19,6 +21,10 @@ const Header = () => {
       await logoutApiCall().unwrap();
       dispatch(logout());
       navigate('/login');
+      toast.success('User Logout', {
+        position: 'bottom-right',
+        autoClose: 2000,
+      });
     } catch (error) {
       console.log(error);
     }
@@ -37,6 +43,7 @@ const Header = () => {
           <Navbar.Toggle aria-controls='basic-navbar-nav' />
           <Navbar.Collapse id='basic-navbar-nav'>
             <Nav className='ms-auto'>
+              <SearchBox />
               <LinkContainer to='/cart'>
                 <Nav.Link>
                   <FaShoppingCart style={{ marginRight: '4px' }} />
