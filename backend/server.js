@@ -1,4 +1,5 @@
 import path from 'path';
+import colors from 'colors';
 import express from 'express';
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
@@ -55,4 +56,4 @@ if (process.env.NODE_ENV === 'production') {
 app.use(notFound);
 app.use(errorHandler);
 
-app.listen(port, () => console.log(`Server running on port: ${port}`));
+app.listen(port, () => console.log(`Server running on port: ${port}`.rainbow));
