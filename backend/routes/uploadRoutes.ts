@@ -1,13 +1,23 @@
 import path from 'path';
-import express from 'express';
-import multer from 'multer';
+import express, { Request, Response } from 'express';
+import multer, { FileFilterCallback } from 'multer';
+import { MulterRequest } from '../types';
+
 const router = express.Router();
 
 const storage = multer.diskStorage({
-  destination(req, file, cb) {
+  destination(
+    req: Request,
+    file: Express.Multer.File,
+    cb: (error: Error | null, destination: string) => void
+  ) {
     cb(null, 'uploads/');
   },
-  filename(req, file, cb) {
+  filename(
+    req: Request,
+    file: Express.Multer.File,
+    cb: (error: Error | null, filename: string) => void
+  ) {
     cb(
       null,
       `${file.fieldname}-${Date.now()}${path.extname(file.originalname)}`
@@ -15,7 +25,11 @@ const storage = multer.diskStorage({
   },
 });
 
-function fileFilter(req, file, cb) {
+function fileFilter(
+  req: Request,
+  file: Express.Multer.File,
+  cb: FileFilterCallback
+) {
   const filetypes = /jpe?g|png|webp/;
   const mimetypes = /image\/jpe?g|image\/png|image\/webp/;
 
@@ -25,17 +39,21 @@ function fileFilter(req, file, cb) {
   if (extname && mimetype) {
     cb(null, true);
   } else {
-    cb(new Error('Images only!'), false);
+    cb(new Error('Images only!') as any, false); // Explicitly cast to 'any' to bypass the type error
   }
 }
 
 const upload = multer({ storage, fileFilter });
 const uploadSingleImage = upload.single('image');
 
-router.post('/', (req, res) => {
+router.post('/', (req: MulterRequest, res: Response) => {
   uploadSingleImage(req, res, function (err) {
     if (err) {
       return res.status(400).send({ message: err.message });
+    }
+
+    if (!req.file) {
+      return res.status(400).send({ message: 'No file uploaded' });
     }
 
     res.status(200).send({

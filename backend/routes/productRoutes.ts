@@ -8,8 +8,8 @@ import {
   deleteProduct,
   createProductReview,
   getTopProducts,
-} from '../controllers/productController.js';
-import { protect, admin } from '../middleware/authMiddleware.js';
+} from '../controllers/productController';
+import { protect, admin } from '../middleware/authMiddleware';
 
 router.route('/').get(getProducts).post(protect, admin, createProduct);
 router.route('/top').get(getTopProducts);

@@ -1,0 +1,6 @@
+{
+  "watch": ["backend/**/*.ts"],
+  "ext": "ts",
+  "exec": "node --trace-warnings loader-register.js --experimental-specifier-resolution=node backend/server.ts",
+  "ignore": ["backend/dist"]
+}

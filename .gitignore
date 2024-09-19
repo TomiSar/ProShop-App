@@ -10,6 +10,8 @@ node_modules
 
 # production
 /build
+/backend/dist
+/frontend/dist
 
 # images
 uploads/

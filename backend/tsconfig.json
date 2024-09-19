@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "outDir": "./dist",
+    "rootDir": "./",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "jsx": "react",
+    "baseUrl": ".",
+    "paths": {
+      "*": ["node_modules/*"]
+    }
+  },
+  "include": [
+    "./config/**/*.ts",
+    "./controllers/**/*.ts",
+    "./data/**/*.ts",
+    "./middleware/**/*.ts",
+    "./models/**/*.ts",
+    "./routes/**/*.ts",
+    "./utils/**/*.ts",
+    "./*.ts",
+    "types.d.ts"
+  ],
+  "exclude": ["node_modules", "**/*.test.ts"]
+}

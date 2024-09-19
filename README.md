@@ -20,11 +20,16 @@
 - http://localhost:5000/api/users/:id (DELETE user by id)
 - http://localhost:5000/api/users/:id (PUT update user by id)
 
-## Installation of needed Packages for (npm or yarn)
+## Installation of needed Packages for backend and frontend (npm or yarn)
 
 - npm i
 - cd frontend
 - npm i
+
+## Clean and build backend into dist folder
+
+- npm run clean
+- npm run build:backend
 
 # Run frontend (localhost:3000) & backend (localhost:5000)
 
@@ -47,6 +52,11 @@ npm run data:import
 # Destroy data
 npm run data:destroy
 ```
+
+## Documents (Test with sandbox account)
+
+- https://developer.paypal.com/api/nvp-soap/payflow/integration-guide/test-transactions/
+- https://developer.paypal.com/dashboard/accounts
 
 ## Usage
 
