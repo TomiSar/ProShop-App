@@ -3,6 +3,7 @@ import express from 'express';
 import 'colors';
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
+import morgan from 'morgan';
 import connectDB from './config/db';
 import { notFound, errorHandler } from './middleware/errorMiddleware';
 import productRoutes from './routes/productRoutes';
@@ -18,10 +19,11 @@ connectDB();
 
 const app = express();
 
-// Middleware for parsing request bodies and cookies
+// Middleware for parsing request bodies, cookies and logging
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+app.use(morgan('tiny'));
 
 app.get('', (req, res) => {
   res.send('API is running...');

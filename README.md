@@ -33,15 +33,16 @@
 
 # Run frontend (localhost:3000) & backend (localhost:5000)
 
-npm run dev
+- npm run dev
 
 ## Run backend only (localhost:5000)
 
-npm run server
+- npm run start
+- npm run server (nodemon)
 
 ## Run frontend only (localhost:3000)
 
-npm run client
+- npm run client
 
 ## Seed Database (sample data)
 
