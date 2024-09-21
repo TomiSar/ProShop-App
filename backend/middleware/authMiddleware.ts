@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import asyncHandler from './asyncHandler';
-import User, { IUser } from '../models/userModel';
+import User, { User as UserType } from '../models/userModel';
 import { NextFunction, Response } from 'express';
 import { CustomRequest, JwtPayloadWithUserId } from '../types'; // Ensure the path is correct
 
@@ -21,7 +21,7 @@ const protect = asyncHandler(
 
         const user = (await User.findById(decoded.userId).select(
           '-password'
-        )) as IUser | null;
+        )) as UserType | null;
 
         if (!user) {
           res.status(401);

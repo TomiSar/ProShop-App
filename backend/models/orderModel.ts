@@ -1,7 +1,7 @@
 import mongoose, { Schema, Document, Model } from 'mongoose';
 
 // Interface for the Order schema
-interface IOrder extends Document {
+interface Order extends Document {
   user: mongoose.Types.ObjectId;
   orderItems: Array<{
     name: string;
@@ -36,7 +36,7 @@ interface IOrder extends Document {
 }
 
 // Order schema using the interface
-const orderSchema: Schema<IOrder> = new mongoose.Schema(
+const orderSchema: Schema<Order> = new mongoose.Schema(
   {
     user: {
       type: mongoose.Schema.Types.ObjectId,
@@ -115,6 +115,6 @@ const orderSchema: Schema<IOrder> = new mongoose.Schema(
 );
 
 // Order model using the schema and interface
-const Order: Model<IOrder> = mongoose.model<IOrder>('Order', orderSchema);
+const Order: Model<Order> = mongoose.model<Order>('Order', orderSchema);
 
 export default Order;
