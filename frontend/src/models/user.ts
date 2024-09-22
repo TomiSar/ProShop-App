@@ -1,5 +1,5 @@
 export interface User {
-  id: string;
+  _id: string; // Match mongoose _id
   name: string;
   email: string;
   isAdmin: boolean;

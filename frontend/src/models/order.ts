@@ -6,7 +6,7 @@ export interface OrderItems {
   qty: number;
   image: string;
   price: number;
-  product: Product['user'];
+  product: Product['_id'];
 }
 
 export interface ShippingAddress {
@@ -25,7 +25,7 @@ export interface PaymentResult {
 
 export interface Order {
   id?: string; // Optional ID
-  user: User['id'];
+  user: User['_id']; // Match mongoose _id
   orderItems: OrderItems[];
   shippingAddress: ShippingAddress;
   paymentMethod: string;
@@ -37,7 +37,7 @@ export interface Order {
   isPaid: boolean;
   paidAt?: Date;
   isDelivered: boolean;
-  deliveredAt?: Date;
-  createdAt: Date;
-  updatedAt: Date;
+  deliveredAt?: string | Date;
+  createdAt: string | Date;
+  updatedAt: string | Date;
 }

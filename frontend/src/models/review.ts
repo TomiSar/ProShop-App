@@ -4,5 +4,5 @@ export interface Review {
   name: string;
   rating: number;
   comment: string;
-  user: User['id'];
+  user: User['_id']; // Match mongoose _id
 }

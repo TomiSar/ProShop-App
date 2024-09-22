@@ -2,8 +2,8 @@ import { User } from './user';
 import { Review } from './review';
 
 export interface Product {
-  id?: string; // Optional ID
-  user: User['id'];
+  _id?: string; // Optional ID
+  user: User['_id']; // Match mongoose _id
   name: string;
   image: string;
   brand: string;
@@ -14,6 +14,6 @@ export interface Product {
   numReviews: number;
   price: number;
   countInStock: number;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: string | Date;
+  updatedAt: string | Date;
 }
