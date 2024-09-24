@@ -1,10 +1,10 @@
 import { Navbar, Container, Nav, Badge, NavDropdown } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
-import { LinkContainer } from 'react-router-bootstrap';
+import { Link, useNavigate } from 'react-router-dom';
 import { FaShoppingCart, FaUser } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLogoutMutation } from '../slices/usersApiSlice';
 import { logout } from '../slices/authSlice';
+import { clearCartItems } from '../slices/cartSlice';
 import { toast } from 'react-toastify';
 import logo from '../assets/logo.png';
 import SearchBox from './SearchBox';
@@ -19,8 +19,10 @@ const Header = () => {
   const logoutHandler = async () => {
     try {
       await logoutApiCall().unwrap();
+      //Clear items after logout
+      dispatch(clearCartItems());
       dispatch(logout());
-      navigate('/login');
+      navigate('/');
       toast.success('User Logout', {
         position: 'bottom-right',
         autoClose: 2000,
@@ -34,57 +36,51 @@ const Header = () => {
     <header>
       <Navbar bg='dark' variant='dark' expand='md' collapseOnSelect>
         <Container>
-          <LinkContainer to='/'>
-            <Navbar.Brand>
-              <img src={logo} alt='proshop' />
-              ProShop
-            </Navbar.Brand>
-          </LinkContainer>
+          <Navbar.Brand as={Link} to='/'>
+            <img src={logo} alt='proshop' />
+            ProShop
+          </Navbar.Brand>
           <Navbar.Toggle aria-controls='basic-navbar-nav' />
           <Navbar.Collapse id='basic-navbar-nav'>
             <Nav className='ms-auto'>
               <SearchBox />
-              <LinkContainer to='/cart'>
-                <Nav.Link>
-                  <FaShoppingCart style={{ marginRight: '4px' }} />
-                  Cart
-                  {cartItems.length > 0 && (
-                    <Badge style={{ marginLeft: '5px' }} pill bg='success'>
-                      {cartItems.reduce((acc, curr) => acc + curr.qty, 0)}
-                    </Badge>
-                  )}
-                </Nav.Link>
-              </LinkContainer>
+              <Nav.Link as={Link} to='/cart'>
+                <FaShoppingCart style={{ marginRight: '4px' }} />
+                Cart
+                {cartItems.length > 0 && (
+                  <Badge style={{ marginLeft: '5px' }} pill bg='success'>
+                    {cartItems.reduce((acc, curr) => acc + curr.qty, 0)}
+                  </Badge>
+                )}
+              </Nav.Link>
               {userInfo ? (
                 <>
                   <NavDropdown title={userInfo.name} id='username'>
-                    <LinkContainer to='/profile'>
-                      <NavDropdown.Item>Profile</NavDropdown.Item>
-                    </LinkContainer>
+                    <NavDropdown.Item as={Link} to='/profile'>
+                      Profile
+                    </NavDropdown.Item>
                     <NavDropdown.Item onClick={logoutHandler}>
                       Logout
                     </NavDropdown.Item>
                   </NavDropdown>
                 </>
               ) : (
-                <LinkContainer to='/login'>
-                  <Nav.Link>
-                    <FaUser style={{ marginRight: '4px' }} />
-                    Sign In
-                  </Nav.Link>
-                </LinkContainer>
+                <Nav.Link as={Link} to='/login'>
+                  <FaUser style={{ marginRight: '4px' }} />
+                  Sign In
+                </Nav.Link>
               )}
               {userInfo && userInfo.isAdmin && (
                 <NavDropdown title='Admin' id='adminmenu'>
-                  <LinkContainer to='/admin/productlist'>
-                    <NavDropdown.Item>Products</NavDropdown.Item>
-                  </LinkContainer>
-                  <LinkContainer to='/admin/userlist'>
-                    <NavDropdown.Item>Users</NavDropdown.Item>
-                  </LinkContainer>
-                  <LinkContainer to='/admin/orderlist'>
-                    <NavDropdown.Item>Orders</NavDropdown.Item>
-                  </LinkContainer>
+                  <NavDropdown.Item as={Link} to='/admin/productlist'>
+                    Products
+                  </NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to='/admin/userlist'>
+                    Users
+                  </NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to='/admin/orderlist'>
+                    Orders
+                  </NavDropdown.Item>
                 </NavDropdown>
               )}
             </Nav>

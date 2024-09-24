@@ -1,5 +1,5 @@
 import { Table, Button } from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap';
+import { Link } from 'react-router-dom';
 import { FaTimes } from 'react-icons/fa';
 import { useGetOrdersQuery } from '../../slices/ordersApiSlice';
 import Message from '../../components/Message';
@@ -52,11 +52,14 @@ const OrderListScreen = () => {
                   )}
                 </td>
                 <td>
-                  <LinkContainer to={`/order/${order._id}`}>
-                    <Button className='btn-sm' variant='light'>
-                      Details
-                    </Button>
-                  </LinkContainer>
+                  <Button
+                    className='btn-sm'
+                    variant='light'
+                    as={Link}
+                    to={`/order/${order._id}`}
+                  >
+                    Details
+                  </Button>
                 </td>
               </tr>
             ))}

@@ -1,5 +1,5 @@
 import { Table, Button } from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap';
+import { Link } from 'react-router-dom';
 import { FaTimes, FaTrash, FaEdit, FaCheck } from 'react-icons/fa';
 import {
   useGetUsersQuery,
@@ -65,11 +65,14 @@ const UserListScreen = () => {
                   )}
                 </td>
                 <td>
-                  <LinkContainer to={`/admin/user/${user._id}/edit`}>
-                    <Button className='btn-sm' variant='light'>
-                      <FaEdit />
-                    </Button>
-                  </LinkContainer>
+                  <Button
+                    className='btn-sm'
+                    variant='light'
+                    as={Link}
+                    to={`/admin/user/${user._id}/edit`}
+                  >
+                    <FaEdit />
+                  </Button>
                   <Button
                     variant='danger'
                     className='btn-sm'

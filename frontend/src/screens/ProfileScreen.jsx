@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Table, Form, Button, Row, Col } from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap';
+import { Link } from 'react-router-dom';
 import { FaTimes } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import { setCredentials } from '../slices/authSlice';
@@ -37,8 +37,7 @@ const ProfileScreen = () => {
       try {
         const res = await updateProfile({
           // NOTE: here we don't need the _id in the request payload as this is
-          // not used in our controller.
-          // _id: userInfo._id,
+          // not used in our controller ==> _id: userInfo._id,
           name,
           email,
           password,
@@ -144,11 +143,14 @@ const ProfileScreen = () => {
                     )}
                   </td>
                   <td>
-                    <LinkContainer to={`/order/${order._id}`}>
-                      <Button className='btn-sm' variant='light'>
-                        Details
-                      </Button>
-                    </LinkContainer>
+                    <Button
+                      className='btn-sm'
+                      variant='light'
+                      as={Link}
+                      to={`/order/${order._id}`}
+                    >
+                      Details
+                    </Button>
                   </td>
                 </tr>
               ))}

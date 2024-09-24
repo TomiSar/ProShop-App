@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { Table, Button, Row, Col } from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap';
+import { Link } from 'react-router-dom';
 import { FaEdit, FaTrash } from 'react-icons/fa';
 import {
   useGetProductsQuery,
@@ -93,11 +93,14 @@ const ProductListScreen = () => {
                   <td>{product.category}</td>
                   <td>{product.brand}</td>
                   <td>
-                    <LinkContainer to={`/admin/product/${product._id}/edit`}>
-                      <Button className='btn-sm mx-2' variant='light'>
-                        <FaEdit />
-                      </Button>
-                    </LinkContainer>
+                    <Button
+                      className='btn-sm mx-2'
+                      variant='light'
+                      as={Link}
+                      to={`/admin/product/${product._id}/edit`}
+                    >
+                      <FaEdit />
+                    </Button>
                     <Button
                       className='btn-sm'
                       style={{ marginLeft: '8px' }}

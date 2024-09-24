@@ -14,8 +14,4 @@ const store = configureStore({
   devTools: true,
 });
 
-// Optional: Define RootState type for better type inference
-export type AppDispatch = typeof store.dispatch;
-export type RootState = ReturnType<typeof store.getState>;
-
 export default store;
